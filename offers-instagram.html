@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>عروض إنستا - تصميم جديد</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --gold: #bfa14a;
+      --gold-dark: #8c741e;
+      --gold-light: #e6d88c;
+      --bg-dark: #121212;
+      --text-light: #f5f5f5;
+      --shadow-gold: rgba(191, 161, 74, 0.35);
+      --radius: 16px;
+      --transition: 0.3s cubic-bezier(.4,2,.3,1);
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Cairo', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-light);
+      min-height: 100vh;
+      direction: rtl;
+      scroll-behavior: smooth;
+    }
+    /* Navbar */
+    nav {
+      background: #1a1a1a;
+      box-shadow: 0 2px 12px var(--shadow-gold);
+      padding: 0 15px;
+      border-radius: 0 0 var(--radius) var(--radius);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 56px;
+      margin-bottom: 28px;
+      animation: fadeInDown 0.8s ease forwards;
+    }
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-25px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .logo svg {
+      width: 32px;
+      height: 32px;
+      fill: var(--gold);
+      filter: drop-shadow(0 0 6px var(--gold));
+    }
+    .logo-text {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--gold);
+      letter-spacing: 1px;
+      text-shadow: 0 2px 8px rgba(191, 161, 74, 0.9);
+      user-select: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 16px;
+    }
+    .nav-links a {
+      color: var(--gold-light);
+      font-weight: 700;
+      text-decoration: none;
+      padding: 6px 16px;
+      border-radius: 12px;
+      transition: background var(--transition), color var(--transition);
+      box-shadow: 0 0 4px transparent;
+      user-select: none;
+    }
+    .nav-links a:hover,
+    .nav-links a.active {
+      background: var(--gold);
+      color: var(--bg-dark);
+      box-shadow: 0 0 14px var(--gold);
+    }
+    /* Container */
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 20px 15px 0 15px;
+    }
+    /* Header */
+    header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 32px;
+      animation: fadeIn 1s ease forwards;
+      text-align: center;
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    header h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--gold);
+      margin: 0;
+      text-shadow: 0 2px 8px rgba(191, 161, 74, 0.85);
+      letter-spacing: 1.2px;
+      user-select: none;
+    }
+    header p {
+      color: var(--gold-light);
+      font-size: 1rem;
+      margin: 0;
+      max-width: 580px;
+      user-select: none;
+    }
+    /* Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 22px;
+      margin-bottom: 40px;
+    }
+    /* Card */
+    .card {
+      background: #222222;
+      border-radius: var(--radius);
+      box-shadow: 0 6px 18px var(--shadow-gold);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      position: relative;
+      min-height: 280px;
+      color: var(--text-light);
+      user-select: none;
+    }
+    .card::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      opacity: 0.3;
+      z-index: 1;
+      border-radius: 0 0 var(--radius) var(--radius);
+    }
+    .card:hover {
+      transform: translateY(-10px) scale(1.05);
+      box-shadow: 0 18px 36px var(--shadow-gold);
+      z-index: 5;
+    }
+    .card:hover::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(191, 161, 74, 0.15);
+      pointer-events: none;
+      border-radius: var(--radius);
+      mix-blend-mode: screen;
+      transition: opacity 0.3s ease;
+      opacity: 1;
+      z-index: 2;
+    }
+    .card img {
+      width: 100%;
+      height: 130px;
+      object-fit: cover;
+      border-bottom: 3px solid var(--gold);
+      transition: filter 0.3s ease;
+      filter: brightness(0.85) saturate(1.2);
+      border-radius: var(--radius) var(--radius) 0 0;
+      display: block;
+      user-select: none;
+    }
+    .card:hover img {
+      filter: brightness(1) saturate(1.4);
+    }
+    .card-content {
+      padding: 14px 18px 16px 18px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      z-index: 3;
+    }
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--gold);
+      margin-bottom: 8px;
+      text-shadow: 0 1px 6px rgba(191, 161, 74, 0.85);
+      letter-spacing: 0.4px;
+      user-select: text;
+    }
+    .card-desc {
+      font-size: 0.95rem;
+      color: var(--gold-light);
+      line-height: 1.5;
+      margin-bottom: 18px;
+      min-height: 48px;
+      user-select: text;
+    }
+    .btn {
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      border: none;
+      color: var(--bg-dark);
+      font-weight: 800;
+      padding: 10px 0;
+      border-radius: 14px;
+      font-size: 0.95rem;
+      transition: background var(--transition), box-shadow var(--transition), color var(--transition);
+      user-select: none;
+      text-align: center;
+      box-shadow: 0 4px 14px rgba(191, 161, 74, 0.55);
+      cursor: pointer;
+      width: 100%;
+      letter-spacing: 0.5px;
+      outline: none;
+      border: 1.5px solid transparent;
+    }
+    .btn:focus,
+    .btn:hover {
+      background: linear-gradient(90deg, var(--gold-dark), var(--gold));
+      box-shadow: 0 8px 22px rgba(140, 116, 30, 0.7);
+      color: var(--text-light);
+      border: 1.5px solid var(--gold-light);
+    }
+    /* Footer */
+    footer {
+      background: var(--gold-dark);
+      color: var(--text-light);
+      text-align: center;
+      padding: 20px 0 12px 0;
+      border-radius: var(--radius) var(--radius) 0 0;
+      font-size: 1rem;
+      letter-spacing: 0.5px;
+      margin-top: 40px;
+      box-shadow: 0 -2px 20px rgba(140, 116, 30, 0.7);
+      opacity: 0.97;
+      user-select: none;
+    }
+    footer a {
+      color: var(--text-light);
+      text-decoration: underline;
+      font-weight: 700;
+      transition: color 0.3s;
+    }
+    footer a:hover {
+      color: var(--gold-light);
+    }
+    /* Responsive */
+    @media (max-width: 900px) {
+      .container {
+        padding: 18px 12px 0 12px;
+      }
+      .grid {
+        gap: 18px;
+      }
+      .card-content {
+        padding: 12px 14px 14px 14px;
+      }
+    }
+    @media (max-width: 600px) {
+      nav {
+        min-height: 48px;
+        padding: 0 10px;
+      }
+      .logo-text {
+        font-size: 1.1rem;
+      }
+      .container {
+        padding: 12px 8px 0 8px;
+      }
+      header h1 {
+        font-size: 1.5rem;
+      }
+      header p {
+        font-size: 0.9rem;
+        max-width: 100%;
+      }
+      .grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 14px;
+      }
+      .card {
+        min-height: 260px;
+      }
+      .card img {
+        height: 110px;
+      }
+      .card-title {
+        font-size: 1rem;
+      }
+      .card-desc {
+        font-size: 0.85rem;
+        min-height: 42px;
+      }
+      .btn {
+        font-size: 0.9rem;
+        padding: 9px 0;
+      }
+      footer {
+        font-size: 0.9rem;
+        padding: 16px 0 10px 0;
+      }
+      .nav-links {
+        gap: 10px;
+      }
+      .nav-links a {
+        padding: 6px 10px;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav>
+    <div class="logo" aria-label="شعار عروض إنستا">
+      <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24">
+        <path
+          d="M7.75 2A5.75 5.75 0 002 7.75v8.5A5.75 5.75 0 007.75 22h8.5A5.75 5.75 0 0022 16.25v-8.5A5.75 5.75 0 0016.25 2h-8.5zm0 1.5h8.5A4.25 4.25 0 0120.5 7.75v8.5a4.25 4.25 0 01-4.25 4.25h-8.5A4.25 4.25 0 013.5 16.25v-8.5A4.25 4.25 0 017.75 3.5zm4.25 3.25a4.5 4.5 0 100 9 4.5 4.5 0 000-9zm0 1.5a3 3 0 110 6 3 3 0 010-6zm4.75-.75a1 1 0 100 2 1 1 0 000-2z"
+        />
+      </svg>
+      <span class="logo-text">عروض إنستا</span>
+    </div>
+    <div class="nav-links" role="navigation" aria-label="روابط التنقل الرئيسية">
+      <a href="#" class="active" aria-current="page">الرئيسية</a>
+      <a href="#">العروض</a>
+      <a href="#">تواصل</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <header>
+      <h1>عروض إنستا المميزة</h1>
+      <p>أفضل باقات التفاعل والانتشار لحسابك على إنستجرام - جودة وسرعة وأمان!</p>
+    </header>
+
+    <main>
+      <section class="grid" aria-label="قائمة عروض إنستجرام">
+        <article class="card" tabindex="0" aria-label="عرض زيادة متابعين إنستا 1000">
+          <img src="https://i.imgur.com/8QZbZqA.jpg" alt="زيادة متابعين إنستا" />
+          <div class="card-content">
+            <h2 class="card-title">زيادة متابعين إنستا 1000</h2>
+            <p class="card-desc">احصل على 1000 متابع حقيقيين لحسابك على إنستجرام بسرعة وأمان.</p>
+            <button class="btn" aria-label="اطلب زيادة متابعين إنستا 1000">اطلب الآن</button>
+          </div>
+        </article>
+
+        <article class="card" tabindex="0" aria-label="عرض 500 لايك منشور إنستا">
+          <img src="https://i.imgur.com/2v9kG7P.jpg" alt="لايكات إنستا" />
+          <div class="card-content">
+            <h2 class="card-title">500 لايك منشور إنستا</h2>
+            <p class="card-desc">زد من تفاعل منشوراتك مع 500 لايك حقيقي سريع ومضمون.</p>
+            <button class="btn" aria-label="اطلب 500 لايك منشور إنستا">اطلب الآن</button>
+          </div>
+        </article>
+
+        <article class="card" tabindex="0" aria-label="عرض 1000 مشاهدة ستوري">
+          <img src="https://i.imgur.com/7LqR6pG.jpg" alt="مشاهدة ستوري إنستا" />
+          <div class="card-content">
+            <h2 class="card-title">1000 مشاهدة ستوري</h2>
+            <p class="card-desc">اجعل ستوري حسابك تصل لأكبر عدد من المشاهدين الحقيقيين.</p>
+            <button class="btn" aria-label="اطلب 1000 مشاهدة ستوري">اطلب الآن</button>
+          </div>
+        </article>
+
+        <article class="card" tabindex="0" aria-label="عرض 200 تعليق مخصص">
+          <img src="https://i.imgur.com/3b4XxQp.jpg" alt="تعليقات إنستا" />
+          <div class="card-content">
+            <h2 class="card-title">200 تعليق مخصص</h2>
+            <p class="card-desc">احصل على تعليقات حقيقية ومخصصة تزيد من تفاعل منشوراتك.</p>
+            <button class="btn" aria-label="اطلب 200 تعليق مخصص">اطلب الآن</button>
+          </div>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    جميع الحقوق محفوظة &copy; 2025 - <a href="#">عروض إنستا</a>
+  </footer>
+</body>
+</html>
